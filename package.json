@@ -1,6 +1,6 @@
 {
   "name": "@ryozm/react-native-barcode",
-  "version": "0.0.0-development",
+  "version": "0.0.2",
   "description": "react native barcode scanner and decoder.",
   "keywords": [
     "react-native",
