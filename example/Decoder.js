@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Image, View, Button, Alert, StyleSheet } from "react-native";
-import * as RNLBarCode from "@yyyyu/react-native-barcode";
+import * as RNLBarCode from "@ryozm/react-native-barcode";
 import IMAGES from "./images";
 
 export default class App extends Component {

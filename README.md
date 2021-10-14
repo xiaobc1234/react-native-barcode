@@ -3,7 +3,7 @@
 
 # react-native-barcode
 
-[![npm version](https://badge.fury.io/js/%40yyyyu%2Freact-native-barcode.svg)](https://www.npmjs.com/package/@yyyyu/react-native-barcode) [![Build Status](https://travis-ci.org/yyyyu/react-native-barcode.svg?branch=master)](https://travis-ci.org/yyyyu/react-native-barcode)
+[![npm version](https://badge.fury.io/js/%40ryozm%2Freact-native-barcode.svg)](https://www.npmjs.com/package/@ryozm/react-native-barcode) [![Build Status](https://travis-ci.org/ryozm/react-native-barcode.svg?branch=master)](https://travis-ci.org/ryozm/react-native-barcode)
 
 **Environment**
 Xcode 10.2.1
@@ -12,13 +12,13 @@ react-native 0.59.5
 ## Getting Started
 
 ```bash
-yarn add @yyyyu/react-native-barcode
+yarn add @ryozm/react-native-barcode
 # or
-npm i @yyyyu/react-native-barcode --save
+npm i @ryozm/react-native-barcode --save
 ```
 
 ```bash
-react-native link @yyyyu/react-native-barcode
+react-native link @ryozm/react-native-barcode
 ```
 
 ## Example
@@ -92,7 +92,7 @@ NSCameraUsageDescription
 // 94   MAXI_CODE       https://en.wikipedia.org/wiki/MaxiCode
 // 64   QR_CODE         https://en.wikipedia.org/wiki/QR_code
 
-import * as RNLBarCode from "@yyyyu/react-native-barcode";
+import * as RNLBarCode from "@ryozm/react-native-barcode";
 
 // RNLBarCode.Type.[Common|ZXing|ZBar|Vision|AVFoundation].[BarCodeType]
 RNLBarCode.Type.Common.QR_CODE

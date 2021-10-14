@@ -1,5 +1,5 @@
 {
-  "name": "@yyyyu/react-native-barcode",
+  "name": "@ryozm/react-native-barcode",
   "version": "0.0.0-development",
   "description": "react native barcode scanner and decoder.",
   "keywords": [
@@ -7,20 +7,20 @@
     "qrcode",
     "barcode"
   ],
-  "homepage": "https://github.com/yyyyu/react-native-barcode",
+  "homepage": "https://github.com/ryozm/react-native-barcode",
   "bugs": {
-    "url": "https://github.com/yyyyu/react-native-barcode/issues"
+    "url": "https://github.com/ryozm/react-native-barcode/issues"
   },
   "license": "MIT",
   "author": {
-    "name": "yyyyu",
-    "email": "g592842897@gmail.com"
+    "name": "ryozm",
+    "email": "695367625@qq.com"
   },
   "main": "dist/index.js",
   "types": "dist/index.d.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/yyyyu/react-native-barcode.git"
+    "url": "https://github.com/ryozm/react-native-barcode.git"
   },
   "scripts": {
     "test": "echo ignore",

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { View, Button, Alert, StyleSheet } from "react-native";
-import * as RNLBarCode from "@yyyyu/react-native-barcode";
+import * as RNLBarCode from "@ryozm/react-native-barcode";
 
 const Scanner = RNLBarCode.Scanner;
 
