@@ -14,5 +14,5 @@ Pod::Spec.new do |s|
   s.platform            = :ios, '8.0'
   s.source_files        = 'ios/*.{h,m}'
   s.dependency 'React'
-  # s.dependency 'ZBarSDK', '~> 1.3'
+  s.dependency 'ATBarSDK', '~> 1.4.1'
 end
