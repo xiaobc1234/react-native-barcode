@@ -44,4 +44,3 @@ buck-out/
 *.keystore
 
 build/
-third_party/
