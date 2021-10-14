@@ -1,7 +1,7 @@
 #import "RNLBarCodeDecoder.h"
 #import "RNLBarCodeUtils.h"
 
-#import <ZBarSDK/ZBarSDK.h>
+#import <ATBarSDK/ZBarSDK.h>
 
 #define ZBAR_DENSITY 2
 
