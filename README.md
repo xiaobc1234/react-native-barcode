@@ -1,3 +1,5 @@
+# Forked from yvvw/react-native-barcode
+# Difference: Replace UIWebView With WKWebView
 # This repository was no longer maintained, thank you for your support
 # 本项目已不再维护，感谢支持
 
