@@ -55,30 +55,59 @@ public final class RNLBarCodeUtils {
 
         Bitmap image;
 
-        if (str.startsWith("file") || str.startsWith("http")) {
-            InputStream iStream = null;
-            try {
-                if (str.startsWith("file")) {
-                    iStream = new FileInputStream(str);
-                } else if (str.startsWith("http")) {
+        // if (str.startsWith("file") || str.startsWith("http")) {
+        //     InputStream iStream = null;
+        //     try {
+        //         if (str.startsWith("file")) {
+        //             iStream = new FileInputStream(str);
+        //         } else if (str.startsWith("http")) {
+        //             URL url = new URL(str);
+        //             URLConnection connection = url.openConnection();
+        //             connection.connect();
+        //             iStream = connection.getInputStream();
+        //         }
+        //         image = BitmapFactory.decodeStream(iStream);
+        //     } finally {
+        //         if (iStream != null) {
+        //             iStream.close();
+        //         }
+        //     }
+        // } else {
+        //     // maybe base64 encoding string
+        //     if (str.startsWith("data:")) {
+        //         str = str.substring(str.indexOf(",") + 1);
+        //     }
+        //     byte[] bytes = Base64.decode(str, Base64.DEFAULT);
+        //     image = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+        // }
+
+        // 解决android 下文件获取不到的问题
+        if (str.startsWith("file://") || str.startsWith("http")) { 
+            InputStream iStream = null; 
+            try { 
+                if (str.startsWith("file:/")) { 
+                    // Fix the bug of opening uri error. 2021/05/28 
+                    // getCacheDir().getPath() = //data/user/0/com.sanxyz.xxx/cache/ PS:Remove Prefix:file:/ 
+                    iStream = new FileInputStream(str.replace("file:/",""));
+                } else if (str.startsWith("http")) { 
                     URL url = new URL(str);
-                    URLConnection connection = url.openConnection();
-                    connection.connect();
-                    iStream = connection.getInputStream();
-                }
-                image = BitmapFactory.decodeStream(iStream);
-            } finally {
-                if (iStream != null) {
-                    iStream.close();
-                }
+                    URLConnection connection = url.openConnection(); 
+                    connection.connect(); 
+                    iStream = connection.getInputStream(); 
+                } 
+                image = BitmapFactory.decodeStream(iStream); 
+            } finally { 
+                if (iStream != null) { 
+                    iStream.close(); 
+                } 
             }
-        } else {
-            // maybe base64 encoding string
-            if (str.startsWith("data:")) {
-                str = str.substring(str.indexOf(",") + 1);
-            }
+        } else { 
+            // maybe base64 encoding string 
+            if (str.startsWith("data:")) { 
+                str = str.substring(str.indexOf(",") + 1); 
+            } 
             byte[] bytes = Base64.decode(str, Base64.DEFAULT);
-            image = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+            image = BitmapFactory.decodeByteArray(bytes, 0, bytes.length); 
         }
 
         return image;
