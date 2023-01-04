@@ -15,31 +15,36 @@ import com.facebook.react.modules.core.PermissionAwareActivity;
 import com.facebook.react.modules.core.PermissionListener;
 import com.facebook.react.uimanager.ThemedReactContext;
 import com.facebook.react.uimanager.events.RCTEventEmitter;
-import com.otaliastudios.cameraview.Audio;
-import com.otaliastudios.cameraview.CameraException;
-import com.otaliastudios.cameraview.CameraListener;
-import com.otaliastudios.cameraview.CameraView;
-import com.otaliastudios.cameraview.Flash;
-import com.otaliastudios.cameraview.Frame;
-import com.otaliastudios.cameraview.FrameProcessor;
-import com.otaliastudios.cameraview.Gesture;
-import com.otaliastudios.cameraview.GestureAction;
-import com.otaliastudios.cameraview.Size;
+// import com.otaliastudios.cameraview.Audio;
+// import com.otaliastudios.cameraview.CameraException;
+// import com.otaliastudios.cameraview.CameraListener;
+// import com.otaliastudios.cameraview.CameraView;
+// import com.otaliastudios.cameraview.Flash;
+// import com.otaliastudios.cameraview.Frame;
+// import com.otaliastudios.cameraview.FrameProcessor;
+// import com.otaliastudios.cameraview.Gesture;
+// import com.otaliastudios.cameraview.GestureAction;
+// import com.otaliastudios.cameraview.Size;
 import com.rnlibrary.barcode.decoder.Decoder;
 import com.rnlibrary.barcode.decoder.ZBarDecoder;
 import com.rnlibrary.barcode.decoder.ZXingDecoder;
 
-public class RNLBarCodeScannerView extends CameraView implements LifecycleEventListener, PermissionListener {
+import android.view.View;
+
+// public class RNLBarCodeScannerView extends CameraView implements LifecycleEventListener, PermissionListener {
+public class RNLBarCodeScannerView extends View implements LifecycleEventListener, PermissionListener {
     private ThemedReactContext mContext;
+    
+    public final static int PERMISSION_REQUEST_CODE = 16;
 
     public RNLBarCodeScannerView(ThemedReactContext context) {
         super(context.getApplicationContext());
         mContext = context;
-        setAudio(Audio.OFF);
-        mapGesture(Gesture.PINCH, GestureAction.ZOOM);
-        mapGesture(Gesture.TAP, GestureAction.FOCUS);
+        // setAudio(Audio.OFF);
+        // mapGesture(Gesture.PINCH, GestureAction.ZOOM);
+        // mapGesture(Gesture.TAP, GestureAction.FOCUS);
         mContext.addLifecycleEventListener(this);
-        addCameraListener(mCameraListener);
+        // addCameraListener(mCameraListener);
         mContext.runOnNativeModulesQueueThread(new Runnable() {
             @Override
             public void run() {
@@ -63,9 +68,9 @@ public class RNLBarCodeScannerView extends CameraView implements LifecycleEventL
                 return;
             }
         }
-        open();
+        // open();
         if (!this.enable) {
-            addFrameProcessor(mFrameProcessor);
+            // addFrameProcessor(mFrameProcessor);
         }
     }
 
@@ -93,7 +98,7 @@ public class RNLBarCodeScannerView extends CameraView implements LifecycleEventL
         mContext.runOnNativeModulesQueueThread(new Runnable() {
             @Override
             public void run() {
-                destroy();
+                // destroy();
                 if (decoder != null) {
                     decoder.release();
                 }
@@ -101,66 +106,66 @@ public class RNLBarCodeScannerView extends CameraView implements LifecycleEventL
         });
     }
 
-    private CameraListener mCameraListener = new CameraListener() {
-        @Override
-        public void onCameraError(@NonNull final CameraException exception) {
-            super.onCameraError(exception);
-            final int reason = exception.getReason();
-            mContext.runOnNativeModulesQueueThread(new Runnable() {
-                @Override
-                public void run() {
-                    Integer code = RNLBarCodeError.InvokeFailed.getCode();
-                    if (reason == CameraException.REASON_NO_CAMERA) {
-                        code = RNLBarCodeError.NoCameraDevice.getCode();
-                    }
-                    errorCallback(code, exception.getMessage());
-                }
-            });
-        }
-    };
+    // private CameraListener mCameraListener = new CameraListener() {
+    //     @Override
+    //     public void onCameraError(@NonNull final CameraException exception) {
+    //         super.onCameraError(exception);
+    //         final int reason = exception.getReason();
+    //         mContext.runOnNativeModulesQueueThread(new Runnable() {
+    //             @Override
+    //             public void run() {
+    //                 Integer code = RNLBarCodeError.InvokeFailed.getCode();
+    //                 if (reason == CameraException.REASON_NO_CAMERA) {
+    //                     code = RNLBarCodeError.NoCameraDevice.getCode();
+    //                 }
+    //                 errorCallback(code, exception.getMessage());
+    //             }
+    //         });
+    //     }
+    // };
 
     private static final int FRAME_THROTTLE_COUNT = 10;
     private int frameCount = 0;
     private boolean isDecoding = false;
 
-    private WritableMap decodeFrame(Frame frame) {
-        Size size = frame.getSize();
-        return decoder.decodeNV21Data(
-                frame.getData(), size.getWidth(), size.getHeight(), frame.getRotation());
-    }
+    // private WritableMap decodeFrame(Frame frame) {
+    //     Size size = frame.getSize();
+    //     return decoder.decodeNV21Data(
+    //             frame.getData(), size.getWidth(), size.getHeight(), frame.getRotation());
+    // }
 
-    public FrameProcessor mFrameProcessor = new FrameProcessor() {
-        @Override
-        @WorkerThread
-        public void process(@NonNull Frame frame) {
-            if (!enable || isDecoding || decoder == null) {
-                return;
-            }
-            if (frameCount-- == 0) {
-                frameCount = FRAME_THROTTLE_COUNT;
-                isDecoding = true;
-                final WritableMap result = decodeFrame(frame);
-                if (result != null) {
-                    mContext.runOnNativeModulesQueueThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            resultCallback(result);
-                        }
-                    });
-                }
-                isDecoding = false;
-            }
-        }
-    };
+    // public FrameProcessor mFrameProcessor = new FrameProcessor() {
+    //     @Override
+    //     @WorkerThread
+    //     public void process(@NonNull Frame frame) {
+    //         if (!enable || isDecoding || decoder == null) {
+    //             return;
+    //         }
+    //         if (frameCount-- == 0) {
+    //             frameCount = FRAME_THROTTLE_COUNT;
+    //             isDecoding = true;
+    //             final WritableMap result = decodeFrame(frame);
+    //             if (result != null) {
+    //                 mContext.runOnNativeModulesQueueThread(new Runnable() {
+    //                     @Override
+    //                     public void run() {
+    //                         resultCallback(result);
+    //                     }
+    //                 });
+    //             }
+    //             isDecoding = false;
+    //         }
+    //     }
+    // };
 
     private boolean enable;
 
     public void setEnable(boolean enable) {
         if (enable && !this.enable) {
             frameCount = 0;
-            addFrameProcessor(mFrameProcessor);
+            // addFrameProcessor(mFrameProcessor);
         } else if (!enable && this.enable) {
-            clearFrameProcessors();
+            // clearFrameProcessors();
         }
         this.enable = enable;
     }
@@ -187,7 +192,7 @@ public class RNLBarCodeScannerView extends CameraView implements LifecycleEventL
             setFormats(this.formats);
         } else {
             if (this.decoder != null) {
-                removeFrameProcessor(mFrameProcessor);
+                // removeFrameProcessor(mFrameProcessor);
                 this.decoder.release();
                 this.decoder = null;
             }
@@ -195,7 +200,7 @@ public class RNLBarCodeScannerView extends CameraView implements LifecycleEventL
                     "Device doesn't support this decoder");
         }
         if (this.decoder != null && this.enable) {
-            addFrameProcessor(mFrameProcessor);
+            // addFrameProcessor(mFrameProcessor);
         }
         this.decoderID = decoderID;
     }
@@ -214,41 +219,41 @@ public class RNLBarCodeScannerView extends CameraView implements LifecycleEventL
     public void setTorch(int torchMode) {
         if (torchMode == 0 && this.torchMode != 0) {
             this.torchMode = torchMode;
-            setFlash(Flash.OFF);
+            // setFlash(Flash.OFF);
         } else if (torchMode == 1 && this.torchMode != 1) {
             this.torchMode = torchMode;
-            setFlash(Flash.TORCH);
+            // setFlash(Flash.TORCH);
         } else if (torchMode == 2 && this.torchMode != 2) {
             this.torchMode = torchMode;
-            setFlash(Flash.AUTO);
+            // setFlash(Flash.AUTO);
         }
         this.torchMode = torchMode;
     }
 
     public void resultCallback(WritableMap result) {
-        callback("onResult", result);
+        // callback("onResult", result);
     }
 
     public void errorCallback(int code, String message) {
         WritableMap error = Arguments.createMap();
         error.putInt("code", code);
         error.putString("message", message);
-        callback("onError", error);
+        // callback("onError", error);
     }
 
-    private void callback(String name, WritableMap event) {
-        mContext.getJSModule(RCTEventEmitter.class)
-                .receiveEvent(getId(), name, event);
-    }
+    // private void callback(String name, WritableMap event) {
+    //     mContext.getJSModule(RCTEventEmitter.class)
+    //             .receiveEvent(getId(), name, event);
+    // }
 
     @Override
     public void onHostResume() {
-        open();
+        // open();
     }
 
     @Override
     public void onHostPause() {
-        close();
+        // close();
     }
 
     @Override

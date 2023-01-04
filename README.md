@@ -1,5 +1,5 @@
 # Forked from yvvw/react-native-barcode
-# Difference: Replace UIWebView With WKWebView
+# Difference: 仅用到decoder功能.移除 android下 com.otaliastudios:cameraview 的依赖， 因为这个包依赖的版本已经找不到了。
 # This repository was no longer maintained, thank you for your support
 # 本项目已不再维护，感谢支持
 

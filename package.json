@@ -1,7 +1,7 @@
 {
-  "name": "@ryozm/react-native-barcode",
-  "version": "0.0.4",
-  "description": "react native barcode scanner and decoder.",
+  "name": "@cniot/react-native-barcode",
+  "version": "0.1.2",
+  "description": "react native barcode scanner and decoder.remove android com.otaliastudios:cameraview",
   "keywords": [
     "react-native",
     "qrcode",
@@ -20,7 +20,7 @@
   "types": "dist/index.d.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ryozm/react-native-barcode.git"
+    "url": "https://github.com/xiaobc1234/react-native-barcode.git"
   },
   "scripts": {
     "test": "echo ignore",
